@@ -70,11 +70,11 @@ class TraceAnalysis(object):
             int or None: The original address in the trace space, or None if slide is unknown.
         """
         # Use logging module, assuming it's imported or available in the scope
-        import logging # Make sure logging is imported if not already
-        logger = logging.getLogger("Tenet.Trace.Analysis") # Get a logger instance
+        # import logging # Make sure logging is imported if not already
+        # logger = logging.getLogger("Tenet.Trace.Analysis") # Get a logger instance
         
         if self.slide is None:
-            logger.warning(f"Cannot unrebase pointer 0x{rebased_address:X}: ASLR slide is unknown (None).") # Assuming logger is defined
+            print(f"Cannot unrebase pointer 0x{rebased_address:X}: ASLR slide is unknown (None).") # Assuming logger is defined
             # print(f"[Tenet Warning] Cannot unrebase pointer 0x{rebased_address:X}: ASLR slide is unknown (None).") # Using print if logger isn't set up
             return None
             
@@ -96,7 +96,7 @@ class TraceAnalysis(object):
            int or None: The original address in the trace space, or None if slide is unknown.
        """
        if self.slide is None:
-           logger.warning(f"Cannot unrebase pointer 0x{rebased_address:X}: ASLR slide is unknown (None).")
+           print(f"Cannot unrebase pointer 0x{rebased_address:X}: ASLR slide is unknown (None).")
            # Depending on strategy, you might return rebased_address or raise an error.
            # Returning None indicates the conversion couldn't be performed reliably.
            return None
@@ -130,7 +130,7 @@ class TraceAnalysis(object):
             pmsg(f"Using manually provided slide: 0x{manual_slide:X}")
             instruction_addresses = dctx.get_instruction_addresses() # Still need these for range
             if not instruction_addresses:
-                logger.error("Cannot determine remapped regions without instruction addresses from IDA.")
+                print("Cannot determine remapped regions without instruction addresses from IDA.")
                 self.slide = None # Indicate failure
                 return False
 
